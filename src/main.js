@@ -1,6 +1,7 @@
 import React from 'react';
 import STORE from './STORE'
-import { Link } from 'react-router-dom'
+import Note from './Note'
+
 
 class Main extends React.Component {
     render() {
@@ -8,11 +9,13 @@ class Main extends React.Component {
         const { notes } = STORE
         const cards = notes.map(note => {
             return(
-            <li key={note.id}>
-                <Link to={`/note/${note.id}`}><h3>{note.name}</h3></Link>
-                <p>Note modified on {note.modified}</p>
-                <button>delete</button>
-            </li>)
+                <Note note={notes} 
+                key={note.id}
+                id={note.id}
+                name={note.name}
+                modified={note.modified}
+                />
+            )
         })
         return (
             <ul>{cards}</ul>

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Note from './Note'
+
 
 export default function Mainfolder(props) {
     const folders = props.store
@@ -9,20 +10,22 @@ export default function Mainfolder(props) {
     console.log(list) //an object
     const findNotes = notes.filter(note =>
         note.folderId === list.id
-        )
-    
+    )
+
     const renderNotes = findNotes.map(note => {
-        return(
-            <li key={note.id}>
-                <Link to={`/note/${note.id}`}><h3>{note.name}</h3></Link>
-                <p>Note modified on {note.modified}</p>
-                <button>delete</button>
-            </li>)
-    })
-    
-    return(
-        <div>
-            {renderNotes}        
-        </div>
+        return (
+            <Note note={notes}
+                key={note.id}
+                id={note.id}
+                name={note.name}
+                modified={note.modified}
+            />
         )
+    })
+
+    return (
+        <div>
+            {renderNotes}
+        </div>
+    )
 }

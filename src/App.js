@@ -6,12 +6,23 @@ import './App.css'
 import STORE from './STORE'
 import Notelist from './Notelist'
 import MainFolder from './MainFolder'
+import NotefulContext from './NotefulContext'
+//needs to store api requests in a context 
+// delete needs to be context object
+
+
 
 class App extends React.Component {
+  state = {
+    notes: 'poopy'
+  }
   render() {
+    const contextValue = {
+      foo:this.state.notes
+    }
     console.log(STORE)
     return (
-      <>
+      <NotefulContext.Provider value={contextValue}>
         <header><h1><Link to='/' className='title'>Noteful</Link></h1></header>
         <main className='main'>
           <div className='column' id='sidebar'>
@@ -26,7 +37,7 @@ class App extends React.Component {
             <Route path='/note/:noteId' render={(props) => <Notelist store={STORE.notes} {...props} />} />
           </div>
         </main>
-      </>
+      </NotefulContext.Provider>
     )
   }
 }

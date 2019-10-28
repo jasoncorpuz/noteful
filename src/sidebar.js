@@ -2,6 +2,7 @@ import React from 'react';
 import STORE from './STORE'
 import './sidebar.css';
 import { NavLink, Link } from 'react-router-dom'
+import NotefulContext from './NotefulContext';
 
 class Sidebar extends React.Component {
     render() {
@@ -9,14 +10,22 @@ class Sidebar extends React.Component {
         console.log(folders)
         const foldersList = folders.map(folder => {
             return (
-                <NavLink to={`/folder/${folder.id}`}key={folder.id} className='folder-list'>{folder.name}</NavLink>
+                <NavLink to={`/folder/${folder.id}`} key={folder.id} className='folder-list'>{folder.name}</NavLink>
             )
         })
         return (
-            <div>
-            {foldersList}
-            <Link to='/'>Add Folder</Link>
-            </div>
+            <NotefulContext.Consumer>
+                {function renderProp(value) {
+                    console.log(value.foo)
+                    return (
+                        < div >
+                            {foldersList}
+                            < Link to='/' > Add Folder</Link>
+                        </div >
+
+                    )}
+                }
+            </NotefulContext.Consumer >
         )
     }
 }
