@@ -1,24 +1,30 @@
 import React from 'react';
-import STORE from './STORE'
 import Note from './Note'
+import NotefulContext from './NotefulContext';
 
 
 class Main extends React.Component {
     render() {
-        console.log(STORE)
-        const { notes } = STORE
-        const cards = notes.map(note => {
-            return(
-                <Note note={notes} 
-                key={note.id}
-                id={note.id}
-                name={note.name}
-                modified={note.modified}
-                />
-            )
-        })
         return (
-            <ul>{cards}</ul>
+            <NotefulContext.Consumer>
+                {function renderProp(value) {
+                    const { notes } = value
+                    const cards = notes.map(note => {
+                        return (
+                            <Note note={notes}
+                                key={note.id}
+                                id={note.id}
+                                name={note.name}
+                                modified={note.modified}
+                            />
+                        )
+                    })
+                    return (
+                        <ul>{cards}</ul>
+                    )
+                }
+                }
+            </NotefulContext.Consumer>
         )
     }
 }
