@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
                     return (
                         < div >
                             {foldersList}
-                            < Link to='/' > Add Folder</Link>
+                            < Link to='/addFolder' > Add Folder</Link>
                         </div >
 
                     )}

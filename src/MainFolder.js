@@ -1,6 +1,7 @@
 import React from 'react'
 import Note from './Note'
 import NotefulContext from './NotefulContext';
+import { Link } from 'react-router-dom';
 
 
 class MainFolder extends React.Component {
@@ -30,7 +31,14 @@ class MainFolder extends React.Component {
                     })
                     console.log(findNotes)
                     console.log(value)
-                    return (<div>{renderNotes}</div>)
+                    return (
+                    <div>
+                        {renderNotes}
+                        <Link to='/addNote' className='addNote'>
+                            <h2>add note</h2>
+                        </Link>
+                        </div>
+                    )
                 }}
             </NotefulContext.Consumer>
         )

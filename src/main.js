@@ -1,6 +1,7 @@
 import React from 'react';
 import Note from './Note'
 import NotefulContext from './NotefulContext';
+import { Link } from 'react-router-dom'
 
 
 class Main extends React.Component {
@@ -19,8 +20,17 @@ class Main extends React.Component {
                             />
                         )
                     })
-                    return (
-                        <ul>{cards}</ul>
+                    return (<div>
+                        <ul>
+                            {cards}
+                            <li>
+                                <Link to='/addNote' className='addNote'>
+                                    <h2>addNote</h2>
+                                    </Link>
+                            </li>
+                        </ul>
+                        </div>
+
                     )
                 }
                 }
