@@ -12,8 +12,8 @@ import Error from './Error'
      console.log(noteID)
      return(
          <NotefulContext.Consumer>
-             {(value)  => {
-                 const {notes} = value
+             {(context)  => {
+                 const {notes} = context
                  const note = notes.find(note =>
                     note.id === noteID)
                  return(
@@ -38,7 +38,7 @@ import Error from './Error'
  }
 
  Notelist.propTypes = {
-    noteI: PropTypes.string
+    note: PropTypes.string
  }
  
  export default Notelist;

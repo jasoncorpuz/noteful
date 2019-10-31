@@ -31,7 +31,7 @@ class AddFolder extends Component {
         })
         .then(data => 
             cb(data))
-        
+        .catch(error => console.log(error))
     }
 
     updateAdd(folder) {

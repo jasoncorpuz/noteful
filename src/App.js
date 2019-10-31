@@ -32,9 +32,11 @@ class App extends React.Component {
   deleteNote = noteId => {
     const newNotes = this.state.notes.filter(note =>
       note.id !== noteId)
+    this.props.history.push('/')
     this.setState({
       notes: newNotes
     })
+    
   }
   addFolder = (name) => {
     const { value, id } = name

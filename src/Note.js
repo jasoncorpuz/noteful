@@ -20,14 +20,12 @@ function deleteNote(noteId, callback){
 class Note extends React.Component {
     
     render() {
-        console.log(this.props)
         const id = this.props.id
         const name = this.props.name
         const modified = this.props.modified
         return(
             <NotefulContext.Consumer>             
                 {(value) => {
-                    console.log(value)
                     return(
                         <div>
                         <li>
