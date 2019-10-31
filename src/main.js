@@ -2,6 +2,7 @@ import React from 'react';
 import Note from './Note'
 import NotefulContext from './NotefulContext';
 import { Link } from 'react-router-dom'
+import Error from './Error'
 
 
 class Main extends React.Component {
@@ -22,7 +23,9 @@ class Main extends React.Component {
                     })
                     return (<div>
                         <ul>
+                            <Error>
                             {cards}
+                            </Error>
                             <li>
                                 <Link to='/addNote' className='addNote'>
                                     <h2>addNote</h2>

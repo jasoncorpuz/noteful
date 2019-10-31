@@ -11,6 +11,7 @@ import NotefulContext from './NotefulContext'
 import config from './config'
 import { withRouter } from 'react-router-dom'
 
+
 class App extends React.Component {
   state = {
     notes: [],
@@ -112,6 +113,7 @@ class App extends React.Component {
             <Route path='/' component={Main} exact />
             <Route path='/folder/:folderId' render={(props) => <MainFolder  {...props} />} />
             <Route path='/note/:noteId' render={(props) => <Notelist {...props} />} />
+            {/* <Route path='/note/:noteId' render={(props) => <Note {...props} folders={this.state.folders}/>} /> */}
             <Route path='/addFolder' component={AddFolder} />
             <Route path='/addNote' component={AddNote} />
           </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import NotefulContext from './NotefulContext';
 import Note from './Note'
 import PropTypes from 'prop-types'
+import Error from './Error'
 
 
  class Notelist extends React.Component {
@@ -11,13 +12,14 @@ import PropTypes from 'prop-types'
      console.log(noteID)
      return(
          <NotefulContext.Consumer>
-             {function renderProp(value) {
-                 const notelist = value.notes
-                 const note = notelist.find(note =>
+             {(value)  => {
+                 const {notes} = value
+                 const note = notes.find(note =>
                     note.id === noteID)
                  return(
+                <Error>
                 <div>
-                <Note note={notelist}
+                <Note note={notes}
                     key={note.id}
                     id={note.id}
                     name={note.name}
@@ -25,6 +27,7 @@ import PropTypes from 'prop-types'
                 />
                 <p>{note.content}</p>
                 </div>
+                </Error>    
 
                  )
     
@@ -39,3 +42,4 @@ import PropTypes from 'prop-types'
  }
  
  export default Notelist;
+

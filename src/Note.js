@@ -25,13 +25,14 @@ class Note extends React.Component {
         const name = this.props.name
         const modified = this.props.modified
         return(
-            <NotefulContext.Consumer>
+            <NotefulContext.Consumer>             
                 {(value) => {
+                    console.log(value)
                     return(
                         <div>
                         <li>
                         <Link 
-                            to={`/note/${id}`}>
+                            to={`/note/${this.props.id}`}>
                             <h3>{name}</h3>
                         </Link>
                         <p>Note modified on {modified}</p>
