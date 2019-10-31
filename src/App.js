@@ -46,6 +46,21 @@ class App extends React.Component {
     console.log(this.state.folders)
     this.props.history.push('/')
   }
+
+  handleAddNote = (data) => {
+    console.log(data)
+    const {name, modified, folderId, content, id } = data
+    const newNote = {
+      'id':id,
+      'name':name,
+      'modified':modified,
+      'folderId':folderId,
+      'content':content
+    }
+    this.setState({ notes: [...this.state.notes, newNote]})
+    console.log(this.state.notes)
+    this.props.history.push('/')
+  }
   componentDidMount() {
     fetch(config.folderUrl)
       .then(r => {
@@ -78,6 +93,7 @@ class App extends React.Component {
       folders: this.state.folders,
       deleteNote: this.deleteNote,
       addFolder: this.addFolder,
+      handleAddNote:this.handleAddNote
     }
 
 

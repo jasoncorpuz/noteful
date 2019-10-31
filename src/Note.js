@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext';
 import config from './config'
+import PropTypes from 'prop-types'
 
 function deleteNote(noteId, callback){
     console.log(noteId)
@@ -19,12 +20,13 @@ function deleteNote(noteId, callback){
 class Note extends React.Component {
     
     render() {
+        console.log(this.props)
         const id = this.props.id
         const name = this.props.name
         const modified = this.props.modified
         return(
             <NotefulContext.Consumer>
-                {function renderProp(value){
+                {(value) => {
                     return(
                         <div>
                         <li>
@@ -45,6 +47,18 @@ class Note extends React.Component {
         )
     
     };
+}
+
+Note.defaultProps = {
+    id:'',
+    name:'',
+    modified:''
+}
+
+Note.propTypes = {
+    id: PropTypes.string,
+    name: PropTypes.string,
+    modified: PropTypes.string
 }
 
 

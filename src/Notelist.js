@@ -1,6 +1,8 @@
 import React from 'react';
 import NotefulContext from './NotefulContext';
 import Note from './Note'
+import PropTypes from 'prop-types'
+
 
  class Notelist extends React.Component {
      
@@ -32,8 +34,8 @@ import Note from './Note'
      }
  }
 
- Notelist.defaultProps = {
-
+ Notelist.propTypes = {
+    noteI: PropTypes.string
  }
  
  export default Notelist;

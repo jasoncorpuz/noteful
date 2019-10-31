@@ -1,69 +1,165 @@
 import React, { Component } from 'react';
-import NotefulContext from './NotefulContext'
+import NotefulContext from './NotefulContext';
 
-class AddNote extends Component {
-    state = {
-        note: {
-            value:'',
-            folder:'Important'
+export default class AddNote extends Component {
+    constructor() {
+        super();
+        this.state = {
+            error: null,
+            name: '',
+            content: '',
+            id: '',
+            nameValid: false,
+            idValid: false,
+            validationMessage: ''
+        };
+    }
+    static contextType = NotefulContext;
+    static defaultProps = {
+        folders: []
+    };
+
+    isNameValid = event => {
+        event.preventDefault();
+        if (!this.state.name) {
+            this.setState({
+                validationMessage: 'Note name can not be blank.',
+                nameValid: false
+            });
+        } else if (!this.state.id) {
+            this.setState({
+                validationMessage: 'You must choose a valid folder.',
+                idValid: false
+            });
+        } else {
+            this.setState(
+                {
+                    validationMessage: '',
+                    nameValid: true
+                },
+                () => {
+                    this.handleAddNote();
+                }
+            );
         }
-    }
+    };
 
-    onAdd(e) {
-       e.preventDefault();
-      const name = this.state.note.value
-      const folder = this.state.note.folder
-      console.log(name, folder)
-    }
+    handleAddNote = () => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: this.state.name,
+                modified: new Date(),
+                folderId: this.state.id,
+                content: this.state.content
+            })
+        };
 
-    updateName(name){
-        this.setState({note: {value:name}})
-    }
+        fetch('http://localhost:9090/notes', options)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Error. try again');
+                }
+                return res;
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.context.handleAddNote(data);
+            })
+            .catch(err => {
+                this.setState({ error: err.message });
+            });
+    };
 
-    updateFolder(e){
-        this.setState({note: {folder:e.target.value}})
-    }
+    nameChange = name => {
+        this.setState({ name: name });
+    };
+ß
+    contentChange = content => {
+        this.setState({ content: content });
+    };
 
+    idChange = folder => {
+        this.setState({ id: folder });
+    };
 
     render() {
-        console.log(this.state)
-        return(
+        return (
             <NotefulContext.Consumer>
-                {(context)=>{ /* DO NOT USE FUNCTION, USE ARROW */
-                    const { folders } = context
-                    const options = folders.map(folder =>{
-                        return(
-                        <option
-                        key={folder.id} 
-                        name='option'
-                        value={folder.name}
-                        >{folder.name}
-                        </option>
-                        )
-                    })
-                    return(
-                        <div>
-                        <h2>Add Note</h2>
-                        <form onSubmit={e => this.onAdd(e)}>
-                            <label htmlFor='input'>Name:</label>
-                            <input 
-                            type='text'
-                            name='note'
-                            value={this.state.note.value}
-                            onChange={e => this.updateName(e.target.value)}
-                            ></input>
-                            <select value={this.state.folder.value} onChange={e =>this.updateFolder(e)}>    
-                                {options}
-                            </select>
-                            <button type='submit'>save</button>
-                        </form>
-                        </div>
-                    )
+                {(context) => {
+                    console.log(context)
+                    return (
+                        <section className='AddNote'>
+                            <h2>Create a note</h2>
+                            <form
+                                onSubmit={event => {
+                                    this.isNameValid(event);
+                                }}
+                            >
+                                <div className='field'>
+                                    <label htmlFor='note-name-input'>Name</label>
+                                    <input
+                                        type='text'
+                                        id='note-name-input'
+                                        name='note'
+                                        onChange={event => {
+                                            this.nameChange(event.target.value);
+                                        }}
+                                    />
+                                </div>
+                                {!this.state.nameValid && (
+                                    <div>
+                                        <p>{this.state.validationMessage}</p>
+                                    </div>
+                                )}
+                                <div className='field'>
+                                    <label htmlFor='note-content-input'>Content</label>
+                                    <textarea
+                                        id='note-content-input'
+                                        name='content'
+                                        onChange={event => {
+                                            this.contentChange(event.target.value);
+                                        }}
+                                    />
+                                </div>
+                                <div className='field'>
+                                    <label htmlFor='note-folder-select'>Folder</label>
+                                    <select
+                                        id='note-folder-select'
+                                        name='folder'
+                                        onChange={event => {
+                                            this.idChange(event.target.value);
+                                        }}
+                                    >
+                                        <option value={null}>...</option>
+                                        {this.context.folders.map(folder => (
+                                            <option key={folder.id} name='folder' value={folder.id}>
+                                                {folder.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {!this.state.nameValid && (
+                                        <div>
+                                            <p>{this.state.validationMessage}</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className='buttons'>
+                                    <button type='submit'>Add note</button>
+                                </div>
+                            </form>
+                            {this.state.error && (
+                                <div>
+                                    <p>{this.state.error}</p>
+                                </div>
+                            )}
+                        </section>
+                    );
                 }}
             </NotefulContext.Consumer>
         )
     }
 }
-
-export default AddNote;
-

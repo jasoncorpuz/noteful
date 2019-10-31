@@ -5,7 +5,8 @@ import React from 'react';
 
 const NotefulContext = React.createContext({
     deleteNote: () => {},
-    addFolder : () => {}
+    addFolder : () => {},
+    handleAddNote: () => {}
 })
 
 export default NotefulContext;
