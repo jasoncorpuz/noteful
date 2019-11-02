@@ -57,6 +57,7 @@ class AddFolder extends Component {
                             type='text' 
                             name='folder' 
                             onChange={e => this.updateAdd(e.target.value)}
+                            required
                         >
                         </input> {/* access through 'name' */}
                         {this.state.folder.touched && (

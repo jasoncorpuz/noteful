@@ -44,9 +44,7 @@ class App extends React.Component {
       "id": id,
       "name": value
     }
-    console.log(newFolder)
     this.setState({ folders: [...this.state.folders, newFolder] })
-    console.log(this.state.folders)
     this.props.history.push('/')
   }
 
