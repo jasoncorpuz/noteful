@@ -97,7 +97,8 @@ class App extends React.Component {
       handleAddNote:this.handleAddNote
     }
 
-
+    console.log(this.state.folders)
+    console.log(this.state.notes)
 
     return (
       <NotefulContext.Provider value={contextValue}>

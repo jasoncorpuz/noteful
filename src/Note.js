@@ -55,7 +55,7 @@ Note.defaultProps = {
 }
 
 Note.propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     modified: PropTypes.string
 }
