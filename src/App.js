@@ -32,10 +32,10 @@ class App extends React.Component {
   deleteNote = noteId => {
     const newNotes = this.state.notes.filter(note =>
       note.id !== noteId)
-    this.props.history.push('/')
-    this.setState({
-      notes: newNotes
-    })
+      this.props.history.push('/')
+      this.setState({
+        notes: newNotes
+      })
     
   }
   addFolder = (name) => {
@@ -73,7 +73,7 @@ class App extends React.Component {
       .then(data => this.setFolders(data))
       .catch(err => console.log(err));
 
-    fetch(config.NoteUrl)
+    fetch(config.noteUrl)
       .then(r => {
         if (!r.ok) {
           throw new Error('AHHHHHH')

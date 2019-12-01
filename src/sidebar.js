@@ -17,7 +17,7 @@ class Sidebar extends React.Component {
                                 to={`/folder/${folder.id}`} 
                                 key={folder.id} 
                                 className='folder-list'>
-                                {folder.folder_name}
+                                {folder.name}
                             </NavLink>
                             
                         )

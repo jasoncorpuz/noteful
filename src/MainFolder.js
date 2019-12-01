@@ -15,9 +15,9 @@ class MainFolder extends React.Component {
                     const { notes, folders } = value
                     const list = folders.find(folder =>
                         folder.id === folderID)
-
-                    const findNotes = notes.filter(note =>
-                        note.folderId === list.id
+                        console.log(list)
+                    const findNotes = notes.find(note =>
+                        note.id === list.id
                     )
                     const renderNotes = findNotes.map(note => {
                         return (

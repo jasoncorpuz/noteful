@@ -7,14 +7,14 @@ import NotefulContext from './NotefulContext';
 class AddFolder extends Component {
     state = {
         folder: {
-            value:'',
+            folder_name:'',
             touched:false
         }
     }
 
     onSubmit(e, cb){
         console.log(cb)
-        e.preventDefault();
+        // e.preventDefault();
         const {folder} = this.state
         fetch(config.folderUrl, {
             method:'POST',
@@ -35,10 +35,10 @@ class AddFolder extends Component {
     }
 
     updateAdd(folder) {
-        this.setState({ folder: {value:folder, touched:true}})
+        this.setState({ folder: {folder_name:folder, touched:true}})
     }
     validateFolder(){
-        const folder = this.state.folder.value.trim();
+        const folder = this.state.folder.folder_name.trim();
         if(folder.length === 0 ) {
             return 'Folder name required'
         }

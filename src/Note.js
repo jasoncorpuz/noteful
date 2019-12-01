@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 function deleteNote(noteId, callback){
     console.log(noteId)
-    fetch(`${config.NoteUrl}/${noteId}`,{
+    fetch(`${config.noteUrl}/${noteId}`,{
         method:'DELETE',
         headers: {
             'content-type':'application/json'
