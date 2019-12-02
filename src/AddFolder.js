@@ -7,14 +7,13 @@ import NotefulContext from './NotefulContext';
 class AddFolder extends Component {
     state = {
         folder: {
-            folder_name:'',
+            name:'',
             touched:false
         }
     }
 
     onSubmit(e, cb){
-        console.log(cb)
-        // e.preventDefault();
+        e.preventDefault();
         const {folder} = this.state
         fetch(config.folderUrl, {
             method:'POST',
@@ -27,18 +26,22 @@ class AddFolder extends Component {
             if(!res.ok){
                 throw new Error('Something broke. Try again?')
             }
-            return res.json()
+            return res;
         })
-        .then(data => 
-            cb(data))
+        .then(res => res.json())
+        .then(data => {
+            cb(data)
+            this.props.history.push('/')
+
+        })
         .catch(error => console.log(error))
     }
 
     updateAdd(folder) {
-        this.setState({ folder: {folder_name:folder, touched:true}})
+        this.setState({ folder: {name:folder, touched:true}})
     }
     validateFolder(){
-        const folder = this.state.folder.folder_name.trim();
+        const folder = this.state.folder.name.trim();
         if(folder.length === 0 ) {
             return 'Folder name required'
         }
