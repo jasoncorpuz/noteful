@@ -8,7 +8,7 @@ import Error from './Error'
 class Notelist extends React.Component {
 
     render() {
-        const noteID = parseInt(this.props.match.params.noteId)
+        const noteID = this.props.match.params.noteId
         return (
             <NotefulContext.Consumer>
                 {(context) => {

@@ -1,4 +1,4 @@
 export default {
-    folderUrl : 'http://localhost:8000/api/folders',
-    noteUrl : 'http://localhost:8000/api/notes',
+    folderUrl : 'https://limitless-crag-39878.herokuapp.com/api/folders',
+    noteUrl : 'https://limitless-crag-39878.herokuapp.com/api/notes',
 }

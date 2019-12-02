@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NotefulContext from './NotefulContext';
+import config from './config';
 
 export default class AddNote extends Component {
     constructor() {
@@ -51,14 +52,13 @@ export default class AddNote extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: this.state.name,
-                modified: new Date(),
+                note_name: this.state.name,
                 folder: this.state.id,
                 content: this.state.content
             })
         };
 
-        fetch('http://localhost:9090/notes', options)
+        fetch(config.noteUrl, options)
             .then(res => {
                 if (!res.ok) {
                     throw new Error('Error. try again');
