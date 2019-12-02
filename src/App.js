@@ -40,26 +40,21 @@ class App extends React.Component {
     
   }
   addFolder = folder => {
-    const { name, id } = folder
+    const { folder_name, id } = folder
     const newFolder = {
       "id": id,
-      "name": name
+      "folder_name": folder_name
     }
     this.setState({ folders: [...this.state.folders, newFolder] })
     this.props.history.push('/')
-    console.log(this.state.folders)
   }
 
   handleAddNote = (data) => {
-    const {name, modified, folderId, content, id } = data
     const newNote = {
-      'id':id,
-      'name':name,
-      'modified':modified,
-      'folderId':folderId,
-      'content':content
+    ...data
     }
     this.setState({ notes: [...this.state.notes, newNote]})
+    this.props.history.push('/')
   }
   componentDidMount() {
     fetch(config.folderUrl)
@@ -95,9 +90,6 @@ class App extends React.Component {
       addFolder: this.addFolder,
       handleAddNote:this.handleAddNote
     }
-
-    // console.log(this.state.folders)
-    // console.log(this.state.notes)
 
     return (
       <NotefulContext.Provider value={contextValue}>

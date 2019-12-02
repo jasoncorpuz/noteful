@@ -7,7 +7,7 @@ import NotefulContext from './NotefulContext';
 class AddFolder extends Component {
     state = {
         folder: {
-            name:'',
+            folder_name:'',
             touched:false
         }
     }
@@ -38,10 +38,10 @@ class AddFolder extends Component {
     }
 
     updateAdd(folder) {
-        this.setState({ folder: {name:folder, touched:true}})
+        this.setState({ folder: {folder_name:folder, touched:true}})
     }
     validateFolder(){
-        const folder = this.state.folder.name.trim();
+        const folder = this.state.folder.folder_name.trim();
         if(folder.length === 0 ) {
             return 'Folder name required'
         }

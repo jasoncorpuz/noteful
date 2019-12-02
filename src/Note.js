@@ -5,14 +5,13 @@ import config from './config'
 import PropTypes from 'prop-types'
 
 function deleteNote(noteId, callback){
-    console.log(noteId)
     fetch(`${config.noteUrl}/${noteId}`,{
         method:'DELETE',
         headers: {
             'content-type':'application/json'
         }
     })
-    .then(res => res.json())
+    // .then(res => res.json())
     .then(res => {
         callback(noteId)
     })
@@ -55,7 +54,6 @@ Note.defaultProps = {
 }
 
 Note.propTypes = {
-    id: PropTypes.number,
     name: PropTypes.string,
     modified: PropTypes.string
 }

@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom';
 class MainFolder extends React.Component {
 
     render() {
-        const folderID = this.props.match.params.folderId
-        console.log(folderID)
+        const folderID = parseInt(this.props.match.params.folderId)
         return (
             <NotefulContext.Consumer>
                 {function renderProp(value) {
@@ -17,7 +16,7 @@ class MainFolder extends React.Component {
                         folder.id === folderID)
 
                     const findNotes = notes.filter(note =>
-                        note.folderId === list.id
+                        note.folder == list.id
                     )
         
                     const renderNotes = findNotes.map(note => {
@@ -30,8 +29,6 @@ class MainFolder extends React.Component {
                             />
                         )
                     })
-                    console.log(findNotes)
-                    console.log(value)
                     return (
                     <div>
                         {renderNotes}

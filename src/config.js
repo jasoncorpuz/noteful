@@ -1,4 +1,4 @@
 export default {
-    folderUrl : 'http://localhost:9090/folders',
-    noteUrl : 'http://localhost:9090/notes',
+    folderUrl : 'http://localhost:8000/api/folders',
+    noteUrl : 'http://localhost:8000/api/notes',
 }

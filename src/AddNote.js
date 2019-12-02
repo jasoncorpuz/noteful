@@ -53,7 +53,7 @@ export default class AddNote extends Component {
             body: JSON.stringify({
                 name: this.state.name,
                 modified: new Date(),
-                folderId: this.state.id,
+                folder: this.state.id,
                 content: this.state.content
             })
         };
@@ -77,7 +77,7 @@ export default class AddNote extends Component {
     nameChange = name => {
         this.setState({ name: name });
     };
-ß
+
     contentChange = content => {
         this.setState({ content: content });
     };
@@ -90,7 +90,6 @@ export default class AddNote extends Component {
         return (
             <NotefulContext.Consumer>
                 {(context) => {
-                    console.log(context)
                     return (
                         <section className='AddNote'>
                             <h2>Create a note</h2>
@@ -137,7 +136,7 @@ export default class AddNote extends Component {
                                         <option value={null}>...</option>
                                         {this.context.folders.map(folder => (
                                             <option key={folder.id} name='folder' value={folder.id}>
-                                                {folder.name}
+                                                {folder.folder_name}
                                             </option>
                                         ))}
                                     </select>
